@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Une invitation pour Madame Sahaza ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+:root{--bg:#190b18;--panel:#281124;--pink:#ff9fca;--pink2:#f16da8;--gold:#f3d69a;--cream:#fff2f7;--muted:#d8b9ca}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#4b1938 0%,#210d20 46%,#100711 100%);color:var(--cream);font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;padding:22px;overflow-x:hidden}
+.stars{position:fixed;inset:0;pointer-events:none;opacity:.6;background-image:radial-gradient(#ffe5f2 1px,transparent 1.5px),radial-gradient(#f3d69a 1px,transparent 1.5px);background-size:73px 73px,113px 113px;background-position:0 0,32px 45px;animation:twinkle 4s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.25}to{opacity:.7}}
+.card{position:relative;width:min(720px,100%);padding:clamp(25px,6vw,54px);border:1px solid #b85d8c77;border-radius:28px;background:linear-gradient(145deg,#35162ceF,#211020f7);box-shadow:0 24px 80px #0008;text-align:center;overflow:hidden}
+.card:before{content:"";position:absolute;inset:9px;border:1px solid #f3d69a35;border-radius:21px;pointer-events:none}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.23em;font-size:.72rem;font-weight:700}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,7vw,4.1rem);line-height:1.08;margin:18px 0 14px;color:#fff0f6}
+h1 span{color:var(--pink)}
+p{color:var(--muted);font-size:1rem;line-height:1.75;margin:12px auto;max-width:540px}
+.heart{font-size:2.4rem;color:var(--pink);filter:drop-shadow(0 0 15px #ff79bb66);animation:beat 1.5s infinite}
+@keyframes beat{50%{transform:scale(1.12)}}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+button,.choice{font:600 .96rem 'DM Sans',sans-serif;border-radius:999px;padding:14px 23px;border:1px solid transparent;cursor:pointer;transition:transform .2s,background .2s;min-height:48px}
+button:hover,.choice:hover{transform:translateY(-2px)}
+.primary{background:linear-gradient(135deg,#ffb3d5,#ed6ca7);color:#42132d;box-shadow:0 8px 25px #f16da833}
+.secondary{background:#ffffff08;color:#f6dce9;border-color:#d79bb755}
+.gold{background:linear-gradient(135deg,#f6e2b3,#d7ad68);color:#2b1721}
+.small-note{font-size:.8rem;color:#b995aa;margin-top:22px}
+.hidden{display:none!important}
+#content{animation:appear .45s ease both}
+@keyframes appear{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0}
+.choice{background:#ffffff08;color:#ffe9f3;border:1px solid #d79bb755;width:100%}
+.choice.selected{background:#f16da82b;border-color:var(--pink);box-shadow:inset 0 0 0 1px #ff9fca44}
+.label{display:block;text-align:left;color:var(--gold);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;margin:20px 0 9px}
+select{width:100%;background:#1a0b19;color:#fff0f6;border:1px solid #d79bb755;border-radius:14px;padding:14px;font:inherit}
+.summary{margin-top:22px;padding:18px;border:1px solid #f3d69a55;border-radius:18px;background:#10071155;line-height:1.8}
+.footer{color:#b995aa;font-size:.75rem;margin-top:25px}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<main class="card">
+  <div id="content">
+    <div class="eyebrow">Une petite question très importante</div>
+    <div class="heart">♡</div>
+    <h1>Madame <span>Sahaza</span>…</h1>
+    <p>J’aimerais vous inviter à un petit rendez-vous, juste pour passer un joli moment avec vous. Alors, qu’en dites-vous ?</p>
+    <div class="actions">
+      <button class="primary" onclick="acceptInvite()">J’accepte ♡</button>
+      <button class="secondary" onclick="refuseInvite()">Je refuse 🙈</button>
+    </div>
+    <div class="small-note">Une invitation préparée avec beaucoup d’attention ✨</div>
+  </div>
+  <div class="footer">Fait avec ♡ spécialement pour vous</div>
+</main>
+<script>
+const content = document.getElementById('content');
+function replaceContent(markup){
+  content.innerHTML = markup;
+  content.classList.remove('hidden');
+  content.style.animation='none';
+  void content.offsetWidth;
+  content.style.animation='appear .45s ease both';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function refuseInvite(){
+  replaceContent(`
+    <div class="eyebrow">Oh, Madame Sahaza…</div>
+    <div class="heart">🥺</div>
+    <h1>Vous refusez déjà ? <span>Non, non…</span></h1>
+    <p>Attendez, laissez-moi au moins vous préparer une jolie sortie. Choisissez plutôt l’endroit, le jour et l’heure qui vous plaisent. ♡</p>
+    <div class="actions"><button class="primary" onclick="showPlanner()">Bon, montre-moi ✨</button></div>
+    <div class="small-note">Cette page remplace entièrement l’invitation : rien ne se superpose.</div>
+  `);
+}
+function acceptInvite(){ showPlanner(); }
+function showPlanner(){
+  const now = new Date();
+  const day = d => { const x=new Date(now); x.setDate(x.getDate()+d); return x; };
+  const fmt = d => d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+  replaceContent(`
+    <div class="eyebrow">Votre petit rendez-vous</div>
+    <h1>Choisissons <span>notre moment</span> ♡</h1>
+    <p>Madame Sahaza, à vous de choisir les détails de cette jolie sortie.</p>
+    <span class="label">Où aimeriez-vous aller ?</span>
+    <div class="choices" id="places">
+      <button class="choice selected" onclick="pickPlace(this,'Talatamaty')">🌷 Talatamaty</button>
+      <button class="choice" onclick="pickPlace(this,'Ambohibao')">🌸 Ambohibao</button>
+      <button class="choice" onclick="pickPlace(this,'Ambonambo')">✨ Ambonambo</button>
+    </div>
+    <span class="label">Quel jour ?</span>
+    <select id="dateChoice" onchange="updateSummary()">
+      <option value="${fmt(day(0))}">Aujourd’hui — ${fmt(day(0))}</option>
+      <option value="${fmt(day(1))}">Demain — ${fmt(day(1))}</option>
+      <option value="${fmt(day(2))}">Après-demain — ${fmt(day(2))}</option>
+    </select>
+    <span class="label">À quelle heure ?</span>
+    <select id="timeChoice" onchange="updateSummary()">
+      <option>15:00</option><option>16:00</option><option>17:00</option>
+      <option>18:00</option><option>19:00</option><option>20:00</option>
+    </select>
+    <div class="summary" id="summary">🌷 Rendez-vous à Talatamaty<br>📅 ${fmt(day(0))}<br>🕰️ 15:00<br><br>J’ai hâte de partager ce moment avec vous. ♡</div>
+    <div class="actions">
+      <button class="primary" onclick="finishPlan()">Confirmer ce joli moment ♡</button>
+    </div>
+  `);
+  window.currentPlace='Talatamaty';
+}
+function finishPlan(){
+  const date=document.getElementById('dateChoice')?.value || 'bientôt';
+  const time=document.getElementById('timeChoice')?.value || '';
+  const place=window.currentPlace || 'Talatamaty';
+  let goodbye = '';
+  const today = new Date();
+  const chosenText = date.toLowerCase();
+  if(chosenText.includes('aujourd’hui') || chosenText.includes('aujourd\'hui') || chosenText.includes('aujourd')) {
+    goodbye = 'Alors, à tout à l’heure, Madame Sahaza… ♡';
+  } else {
+    goodbye = 'Alors, à demain ou très bientôt, Madame Sahaza… ♡';
+  }
+  replaceContent(`
+    <div class="eyebrow">Merci pour ce joli moment</div>
+    <div class="heart">💗</div>
+    <h1>Merci, <span>Madame Sahaza</span>…</h1>
+    <p>Merci d’avoir choisi ce petit rendez-vous. Je suis déjà heureux à l’idée de partager ce moment avec vous.</p>
+    <div class="summary">🌷 ${place}<br>📅 ${date}<br>🕰️ ${time}</div>
+    <p style="color:var(--gold);font-family:'Playfair Display',serif;font-size:1.35rem;margin-top:24px">${goodbye}</p>
+    <p>Prenez soin de vous d’ici là. ✨</p>
+  `);
+}
+function pickPlace(btn,place){
+  document.querySelectorAll('#places .choice').forEach(x=>x.classList.remove('selected'));
+  btn.classList.add('selected'); window.currentPlace=place; updateSummary();
+}
+function updateSummary(){
+  const date=document.getElementById('dateChoice')?.value || '';
+  const time=document.getElementById('timeChoice')?.value || '15:00';
+  const place=window.currentPlace || 'Talatamaty';
+  const el=document.getElementById('summary');
+  if(el) el.innerHTML=`🌷 Rendez-vous à ${place}<br>📅 ${date}<br>🕰️ ${time}<br><br>J’ai hâte de partager ce moment avec vous. ♡`;
+}
+function copySummary(){
+  const text=document.getElementById('summary')?.innerText || '';
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>alert('Les détails sont copiés ♡')).catch(()=>fallbackCopy(text));
+  }else fallbackCopy(text);
+}
+function fallbackCopy(text){
+  const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');alert('Les détails sont copiés ♡')}catch(e){alert(text)}
+  ta.remove();
+}
+function backToInvite(){
+  replaceContent(`
+    <div class="eyebrow">Une petite question très importante</div>
+    <div class="heart">♡</div>
+    <h1>Madame <span>Sahaza</span>…</h1>
+    <p>J’aimerais vous inviter à un petit rendez-vous, juste pour passer un joli moment avec vous. Alors, qu’en dites-vous ?</p>
+    <div class="actions"><button class="primary" onclick="acceptInvite()">J’accepte ♡</button><button class="secondary" onclick="refuseInvite()">Je refuse 🙈</button></div>
+    <div class="small-note">Une invitation préparée avec beaucoup d’attention ✨</div>
+  `);
+}
+</script>
+</body>
+</html>
